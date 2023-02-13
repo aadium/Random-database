@@ -109,7 +109,7 @@ class dataentry
         void showentry(int serialno)
         {
             string line;
-            ifstream myfile ("database.csv");
+            ifstream myfile ("database.csv", ios::app);
             int lineNumber = 0;
 
             if (myfile.is_open()) {
@@ -128,7 +128,38 @@ class dataentry
             }
         }
 
-        // Add more functions for updating and deleting an entry
+        void deleteentry(int serialno)
+        {
+            string line;
+            vector<string> lines;
+            ifstream INFILE("database.csv");
+            int lineNumber = 1;
+
+            if (INFILE.is_open()) {
+                while (getline(INFILE, line)) {
+                    lineNumber++;
+                    if (lineNumber != serialno) {
+                        lines.push_back(line);
+                    }
+                }
+                INFILE.close();
+    
+            }
+            else
+            {
+                cout << "Unable to open file" << endl;
+            }
+
+            ofstream OUTFILE("database.csv");
+            for (string l : lines)
+            {
+                OUTFILE << l << endl;
+            }
+            OUTFILE.close();
+        }
+
+
+        // Add more functions for updating an entry
 };
 
 int main(int argc, char const *argv[])
@@ -149,6 +180,7 @@ int main(int argc, char const *argv[])
     long long int phone{};
     long long int serialno{};
     long long int serialnotofind{};
+    long long int serialnotodelete{};
     int countrycode{};
     int dob{};
     int yob{};
@@ -157,9 +189,6 @@ int main(int argc, char const *argv[])
     bool valid = false;
 
     this_thread::sleep_for(1s);
-
-    ofstream Fout("database.csv");
-    Fout.close();
 
     cout << "Welcome to UAP Datasystems. Unlock the Power of Data with Our Cutting-Edge Database Solutions." << endl;
 
@@ -245,7 +274,15 @@ int main(int argc, char const *argv[])
                 entry.showdata();
             }
                 
-        }        
+        }
+
+        if (actionchoice == 4)
+        {
+            cout << "Enter the serial number of the entry you want to delete: ";
+            cin >> serialnotodelete;
+            entry.deleteentry(serialnotodelete);
+        }
+         
     } while (actionchoice != 5);
 
     this_thread::sleep_for(1s);
