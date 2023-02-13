@@ -12,12 +12,12 @@ class login
 
         bool checklogindata(string inputusername, string inputpassword, string username, string password)
         {
-            bool valid = false;
+            bool valid = 0;
             if ((inputusername == username) && (inputpassword == password))
             {
                 this_thread::sleep_for(1s);
                 cout << "Login successful." << endl;
-                valid = true;
+                valid = 1;
 
             }
             
@@ -25,7 +25,7 @@ class login
             {
                 this_thread::sleep_for(1s);
                 cout << "Invalid username or password." << endl;
-                valid = false;
+                valid = 0;
 
             }
 
