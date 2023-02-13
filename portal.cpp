@@ -133,7 +133,7 @@ class dataentry
             string line;
             vector<string> lines;
             ifstream INFILE("database.csv");
-            int lineNumber = 1;
+            int lineNumber = 0;
 
             if (INFILE.is_open()) {
                 while (getline(INFILE, line)) {
