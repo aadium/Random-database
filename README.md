@@ -1,2 +1,3 @@
 # Random database
- 
+
+The code is a simple database management system that allows for data entry, retrieval, and modification. The program has two classes login and dataentry. The login class has a function that verifies the entered username and password against the existing ones. The dataentry class has functions for adding, displaying, and retrieving data from the database.csv file. The main function initializes objects from the two classes and takes inputs from the user to perform different actions such as adding new data to the database, displaying all data, or retrieving a specific data entry based on the serial number. The program also creates the database.csv file if it does not exist.
