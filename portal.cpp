@@ -84,7 +84,7 @@ class dataentry
 
         }
 
-        void showentry(int serialno)
+        void showentry(long long int serialno)
         {
             string line;
             ifstream myfile ("database.csv", ios::app);
@@ -106,7 +106,12 @@ class dataentry
             }
         }
 
-        void deleteentry(int serialno)
+        void updateentry(string firstname, string middlename, string lastname, int countrycode, long long int serialno, long long int phone, string email, int dob, string mob, int yob, string gender)
+        {
+            // code to update an entry
+        }
+
+        void deleteentry(long long int serialno)
         {
             string line;
             vector<string> lines;
@@ -323,21 +328,18 @@ int main(int argc, char const *argv[])
             cout << "Enter gender: ";
             cin >> gender;
 
+            entry.updateentry(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
+
         }
         
 
         if (actionchoice == 4) // delete entry
         {
-            do
-            {
-                this_thread::sleep_for(1s);
-                cout << "Enter the serial number of the entry you want to delete: ";
-                cin >> serialnotodelete;
-                entry.deleteentry(serialnotodelete);
+            this_thread::sleep_for(1s);
+            cout << "Enter the serial number of the entry you want to delete: ";
+            cin >> serialnotodelete;
+            entry.deleteentry(serialnotodelete);
 
-                cout << "Do you want to delete more entries(Y/N)?: ";
-                cin >> choice;
-            } while (choice == 'Y');
         }
          
     } while (actionchoice != 5);
