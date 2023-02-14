@@ -243,13 +243,13 @@ int main(int argc, char const *argv[])
                 cin >> countrycode;
                 cout << "Enter E-mail I.D.: ";
                 cin >> email;
-                cout << "Enter day number of birth: ";
+                cout << "Enter day of birth (Number): ";
                 cin >> dob;
-                cout << "Enter month of birth: ";
+                cout << "Enter month of birth (Month name): ";
                 cin >> mob;
-                cout << "Enter year of birth: ";
+                cout << "Enter year of birth (Number): ";
                 cin >> yob;
-                cout << "Enter gender: ";
+                cout << "Enter gender (Full word): ";
                 cin >> gender;
                 
                 entry.adddata(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
@@ -319,13 +319,13 @@ int main(int argc, char const *argv[])
             cin >> countrycode;
             cout << "Enter E-mail I.D.: ";
             cin >> email;
-            cout << "Enter day number of birth: ";
+            cout << "Enter day of birth (Number): ";
             cin >> dob;
-            cout << "Enter month of birth: ";
+            cout << "Enter month of birth (Month name): ";
             cin >> mob;
-            cout << "Enter year of birth: ";
+            cout << "Enter year of birth (Number): ";
             cin >> yob;
-            cout << "Enter gender: ";
+            cout << "Enter gender (Full word): ";
             cin >> gender;
 
             entry.updateentry(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
