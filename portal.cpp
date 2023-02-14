@@ -201,16 +201,16 @@ int main(int argc, char const *argv[])
         cout << "Enter 1 for adding an entry." << endl;
         cout << "Enter 2 for viewing entries." << endl;
         cout << "Enter 3 for updating an entry (not yet functional)." << endl; //Feature to be added
-        cout << "Enter 4 for deleting an entry." << endl; //Feature to be added
+        cout << "Enter 4 for deleting an entry." << endl;
         cout << "Enter 5 to log out." << endl;
         cin >> actionchoice;
 
         if (actionchoice == 1) // add entries
         {
-                this_thread::sleep_for(1s);
-                do
-                {   
-                    choice == 'N';
+            this_thread::sleep_for(1s);
+            do
+            {   
+                choice == 'N';
                 string line;
                 ifstream inputfile ("database.csv");
                 int lineNumber = 1;
