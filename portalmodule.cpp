@@ -281,18 +281,19 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
     }
 }
 
+// function deletes an entry based on the serial number
 void dataentry::deleteentry(long long int serialno)
 {
     string line;
-    vector<string> lines;
+    vector<string> lines; // the vector stores all the data entries from the csv file
     ifstream INFILE("database.csv");
     int lineNumber = 0;
 
     if (INFILE.is_open()) {
         while (getline(INFILE, line)) {
-            lineNumber++;
+            lineNumber++; // lineNumber increments itself with every iteration as long as 'line' receives data
             if (lineNumber != serialno) {
-                lines.push_back(line);
+                lines.push_back(line); // 'lines' vector increments its size with every iteration as long as lineNumber does not equal the serialno
             }
         }
         INFILE.close();
@@ -302,10 +303,11 @@ void dataentry::deleteentry(long long int serialno)
     {
         cout << "Unable to open file" << endl;
     }
-
+    
+    // a new blank file with the same name is created
     ofstream OUTFILE("database.csv");
     for (string l : lines)
-    {
+    {// the data stored in 'lines' is entered into the database.csv file
         OUTFILE << l << endl;
     }
     OUTFILE.close();
