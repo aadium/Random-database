@@ -235,39 +235,37 @@ int main(int argc, char const *argv[])
                 cin >> firstname;
                 cout << "Enter middle name (Optional, Enter '-' to skip field): ";
                 cin >> middlename;
-                if (middlename == "-")
-                {
-                    middlename == " ";
-                }
                 cout << "Enter last name: ";
                 cin >> lastname;
                 cout << "Enter phone number (without country code): ";
                 cin >> phone;
-                cout << "Enter country code (Eg: 1, 44): ";
+                cout << "Enter country code (Eg: 1, 44, etc.): ";
                 cin >> countrycode;
                 cout << "Enter E-mail I.D.: ";
                 cin >> email;
-                cout << "Enter date of birth (Eg: 21, 15): ";
+                cout << "Enter date of birth (Eg: 21, 15, etc.): ";
                 cin >> dob;
                 if ((dob < 1) or (dob > 31))
                 {
                     dob == 0;
-                    cout << "Invalid Input. Cancelling operation." << endl;
+                    cout << "Invalid date input. Cancelling operation." << endl;
+                    this_thread::sleep_for(1s);
                     break;
                 }
 
-                cout << "Enter month of birth (Eg: January, September): ";
+                cout << "Enter month of birth (Eg: January, September, etc.): ";
                 cin >> mob;
                 if ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April ") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December"))
                 {
                     mob == " ";
-                    cout << "Invalid Input. Cancelling operation." << endl;
+                    cout << "Invalid month input. Cancelling operation." << endl;
+                    this_thread::sleep_for(1s);
                     break;
                 }
 
-                cout << "Enter year of birth (Eg: 1987, 2006): ";
+                cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
                 cin >> yob;
-                cout << "Enter gender (Eg: Male): ";
+                cout << "Enter gender (Eg: Male, Female, etc.): ";
                 cin >> gender;
                 
                 entry.adddata(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
@@ -329,39 +327,37 @@ int main(int argc, char const *argv[])
             cin >> firstname;
             cout << "Enter middle name (Optional, Enter '-' to skip field): ";
             cin >> middlename;
-            if (middlename == "-")
-            {
-                middlename == " ";
-            }
             cout << "Enter last name: ";
             cin >> lastname;
             cout << "Enter phone number (without country code): ";
             cin >> phone;
-            cout << "Enter country code (Eg: 1, 974, 91): ";
+            cout << "Enter country code (Eg: 1, 974, 91, etc.): ";
             cin >> countrycode;
             cout << "Enter E-mail I.D.: ";
             cin >> email;
-            cout << "Enter date of birth (Eg: 21, 15): ";
+            cout << "Enter date of birth (Eg: 21, 15, etc.): ";
             cin >> dob;
             if ((dob < 1) or (dob > 31))
             {
                 dob == 0;
-                cout << "Invalid Input. Cancelling operation." << endl;
+                cout << "Invalid date input. Cancelling operation." << endl;
+                this_thread::sleep_for(1s);
                 break;
             }
 
-            cout << "Enter month of birth (Eg: January, September): ";
+            cout << "Enter month of birth (Eg: January, September, etc.): ";
             cin >> mob;
             if ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April ") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December"))
             {
                 mob == " ";
-                cout << "Invalid Input. Cancelling operation." << endl;
+                cout << "Invalid month input. Cancelling operation." << endl;
+                this_thread::sleep_for(1s);
                 break;
             }
 
-            cout << "Enter year of birth (Eg: 1987, 2006): ";
+            cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
             cin >> yob;
-            cout << "Enter gender (Eg: Male, Female): ";
+            cout << "Enter gender (Eg: Male, Female, etc.): ";
             cin >> gender;
 
             entry.updateentry(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
