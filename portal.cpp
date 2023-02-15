@@ -233,23 +233,41 @@ int main(int argc, char const *argv[])
 
                 cout << "Enter first name: ";
                 cin >> firstname;
-                cout << "Enter middle name: ";
+                cout << "Enter middle name (Optional, Enter '-' to skip field): ";
                 cin >> middlename;
+                if (middlename == "-")
+                {
+                    middlename == " ";
+                }
                 cout << "Enter last name: ";
                 cin >> lastname;
                 cout << "Enter phone number (without country code): ";
                 cin >> phone;
-                cout << "Enter country code: ";
+                cout << "Enter country code (Eg: 1, 44): ";
                 cin >> countrycode;
                 cout << "Enter E-mail I.D.: ";
                 cin >> email;
-                cout << "Enter day of birth (Number): ";
+                cout << "Enter date of birth (Eg: 21, 15): ";
                 cin >> dob;
-                cout << "Enter month of birth (Month name): ";
+                if ((dob < 1) or (dob > 31))
+                {
+                    dob == 0;
+                    cout << "Invalid Input. Cancelling operation." << endl;
+                    break;
+                }
+
+                cout << "Enter month of birth (Eg: January, September): ";
                 cin >> mob;
-                cout << "Enter year of birth (Number): ";
+                if ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April ") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December"))
+                {
+                    mob == " ";
+                    cout << "Invalid Input. Cancelling operation." << endl;
+                    break;
+                }
+
+                cout << "Enter year of birth (Eg: 1987, 2006): ";
                 cin >> yob;
-                cout << "Enter gender (Full word): ";
+                cout << "Enter gender (Eg: Male): ";
                 cin >> gender;
                 
                 entry.adddata(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
@@ -309,23 +327,41 @@ int main(int argc, char const *argv[])
 
             cout << "Enter first name: ";
             cin >> firstname;
-            cout << "Enter middle name: ";
+            cout << "Enter middle name (Optional, Enter '-' to skip field): ";
             cin >> middlename;
+            if (middlename == "-")
+            {
+                middlename == " ";
+            }
             cout << "Enter last name: ";
             cin >> lastname;
             cout << "Enter phone number (without country code): ";
             cin >> phone;
-            cout << "Enter country code: ";
+            cout << "Enter country code (Eg: 1, 974, 91): ";
             cin >> countrycode;
             cout << "Enter E-mail I.D.: ";
             cin >> email;
-            cout << "Enter day of birth (Number): ";
+            cout << "Enter date of birth (Eg: 21, 15): ";
             cin >> dob;
-            cout << "Enter month of birth (Month name): ";
+            if ((dob < 1) or (dob > 31))
+            {
+                dob == 0;
+                cout << "Invalid Input. Cancelling operation." << endl;
+                break;
+            }
+
+            cout << "Enter month of birth (Eg: January, September): ";
             cin >> mob;
-            cout << "Enter year of birth (Number): ";
+            if ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April ") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December"))
+            {
+                mob == " ";
+                cout << "Invalid Input. Cancelling operation." << endl;
+                break;
+            }
+
+            cout << "Enter year of birth (Eg: 1987, 2006): ";
             cin >> yob;
-            cout << "Enter gender (Full word): ";
+            cout << "Enter gender (Eg: Male, Female): ";
             cin >> gender;
 
             entry.updateentry(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
