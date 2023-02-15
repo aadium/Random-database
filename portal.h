@@ -1,11 +1,10 @@
-#ifndef _ASMD_H_
-#define _ASMD_H_
+#ifndef _PORTAL_H_
+#define _PORTAL_H_
 #include <string>
 
 class login
 {
     public:
-
         bool checklogindata(std::string inputusername, std::string inputpassword, std::string username, std::string password);
 };
 class dataentry
