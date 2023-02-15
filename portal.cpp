@@ -1,8 +1,5 @@
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <vector>
-#include <regex>
 #include "portal.h"
 using namespace std;
 
