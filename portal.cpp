@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <regex>
 using namespace std;
 
 class login
@@ -97,6 +98,13 @@ class dataentry
             cin >> countrycode;
             cout << "Enter E-mail I.D.: ";
             cin >> email;
+            // check if input format is valid
+            regex pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+            while (!regex_match(email, pattern)) {
+                cout << "Invalid email input. Please enter a valid email address: ";
+                cin >> email;
+            }
+
             cout << "Enter date of birth (Eg: 21, 15, etc.): ";
             cin >> dob;
             // check if input is valid
@@ -120,6 +128,13 @@ class dataentry
 
             cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
             cin >> yob;
+            while ((yob < 1850) or (yob > 2023))
+            {
+                cin.clear(); // clear error flags
+                cin.ignore(100, '\n'); // ignore remaining characters in buffer
+                cout << "Invalid year input. Please enter a value between 1850 and 2023: ";
+                cin >> yob;
+            }
             cout << "Enter gender (Eg: Male, Female, etc.): ";
             cin >> gender;
         
@@ -206,6 +221,12 @@ class dataentry
                         cin >> countrycode;
                         cout << "Enter E-mail I.D.: ";
                         cin >> email;
+                        // check if input format is valid
+                        regex pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+                        while (!regex_match(email, pattern)) {
+                            cout << "Invalid email input. Please enter a valid email address: ";
+                            cin >> email;
+                        }
                         cout << "Enter date of birth (Eg: 21, 15, etc.): ";
                         cin >> dob;
                         // check if input is valid
@@ -227,6 +248,14 @@ class dataentry
                         }
                         cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
                         cin >> yob;
+                        while ((yob < 1850) or (yob > 2023))
+                        {
+                            cin.clear(); // clear error flags
+                            cin.ignore(100, '\n'); // ignore remaining characters in buffer
+                            cout << "Invalid year input. Please enter a value between 1850 and 2023: ";
+                            cin >> yob;
+                        }
+                        
                         cout << "Enter gender (Eg: Male, Female, etc.): ";
                         cin >> gender;
 
@@ -384,7 +413,7 @@ int main(int argc, char const *argv[])
 
         if (actionchoice == 3) // update entry
         {
-            cout << "Enter the serial number fo the data entry you want to update: ";
+            cout << "Enter the serial number of the data entry you want to update: ";
             cin >> serialnotoupdate;
             entry.updateentry(firstname, middlename, lastname, countrycode, serialnotoupdate, phone, email, dob, mob, yob, gender);
 
