@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <thread>
 using namespace std;
 
 class login
@@ -33,7 +32,6 @@ class login
             bool valid = 0;
             if ((inputusername == username) && (inputpassword == password))
             {
-                this_thread::sleep_for(1s);
                 cout << "Login successful." << endl;
                 valid = 1;
 
@@ -41,7 +39,6 @@ class login
             
             else if ((inputusername != username) or (inputpassword != password))
             {
-                this_thread::sleep_for(1s);
                 cout << "Invalid username or password." << endl;
                 valid = 0;
 
@@ -58,8 +55,60 @@ class dataentry
 
     public:
 
-        void adddata(string firstname, string middlename, string lastname, int countrycode, long long int serialno, long long int phone, string email, int dob, string mob, int yob, string gender)
+        void addentry(string firstname, string middlename, string lastname, int countrycode, long long int serialno, long long int phone, string email, int dob, string mob, int yob, string gender)
         {
+            string line;
+            ifstream inputfile ("database.csv");
+            int lineNumber = 1;
+
+            if (inputfile.is_open()) {
+
+                while (getline(inputfile,line)) {
+                    lineNumber++;
+                }
+
+                inputfile.close();
+                serialno = lineNumber;
+            }
+            
+            else 
+            {
+                cout << "Unable to open database." << endl;
+                exit(0);
+            }
+            cout << "Enter first name: ";
+            cin >> firstname;
+            cout << "Enter middle name (Optional, Enter '-' to skip field): ";
+            cin >> middlename;
+            cout << "Enter last name: ";
+            cin >> lastname;
+            cout << "Enter phone number (without country code): ";
+            cin >> phone;
+            cout << "Enter country code (Eg: 1, 44, etc.): ";
+            cin >> countrycode;
+            cout << "Enter E-mail I.D.: ";
+            cin >> email;
+            cout << "Enter date of birth (Eg: 21, 15, etc.): ";
+            cin >> dob;
+            if ((dob < 1) or (dob > 31))
+            {
+                cout << "Invalid date input. Cancelling operation." << endl;
+                exit(0);
+            }
+
+            cout << "Enter month of birth (Eg: January, September, etc.): ";
+            cin >> mob;
+            if ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April ") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December"))
+            {
+                cout << "Invalid month input. Cancelling operation." << endl;
+                exit(0);
+            }
+
+            cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
+            cin >> yob;
+            cout << "Enter gender (Eg: Male, Female, etc.): ";
+            cin >> gender;
+        
             ofstream outfile;
             outfile.open("database.csv", ios::app);
 
@@ -108,7 +157,70 @@ class dataentry
 
         void updateentry(string firstname, string middlename, string lastname, int countrycode, long long int serialno, long long int phone, string email, int dob, string mob, int yob, string gender)
         {
-            // code to update an entry
+            string line;
+            vector<string> lines;
+            ifstream inputfile("database.csv");
+            int lineNumber = 0;
+
+            if (inputfile.is_open())
+            {
+                while (getline(inputfile, line))
+                {
+                    lineNumber++;
+                    if (lineNumber == serialno)
+                    {
+                        cout << "Enter first name: ";
+                        cin >> firstname;
+                        cout << "Enter middle name (Optional, Enter '-' to skip field): ";
+                        cin >> middlename;
+                        cout << "Enter last name: ";
+                        cin >> lastname;
+                        cout << "Enter phone number (without country code): ";
+                        cin >> phone;
+                        cout << "Enter country code (Eg: 1, 44, etc.): ";
+                        cin >> countrycode;
+                        cout << "Enter E-mail I.D.: ";
+                        cin >> email;
+                        cout << "Enter date of birth (Eg: 21, 15, etc.): ";
+                        cin >> dob;
+                        if ((dob < 1) or (dob > 31))
+                        {
+                            cout << "Invalid date input. Cancelling operation." << endl;
+                            exit(0);
+                        }
+
+                        cout << "Enter month of birth (Eg: January, September, etc.): ";
+                        cin >> mob;
+                        if ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April ") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December"))
+                        {
+                            cout << "Invalid month input. Cancelling operation." << endl;
+                            exit(0);
+                        }
+
+                        cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
+                        cin >> yob;
+                        cout << "Enter gender (Eg: Male, Female, etc.): ";
+                        cin >> gender;
+
+                        line = to_string(serialno) + "," + firstname + "," + middlename + "," + lastname + "," + to_string(countrycode) + "," + to_string(phone) + "," + email + "," + to_string(dob) + "," + mob + "," + to_string(yob) + "," + gender;
+                    }
+                    lines.push_back(line);
+                }
+                inputfile.close();
+
+                ofstream outputfile("database.csv");
+                for (string l : lines)
+                {
+                    outputfile << l << endl;
+                }
+                outputfile.close();
+
+                cout << "Record updated successfully." << endl;
+            }
+            else
+            {
+                cout << "Unable to open database." << endl;
+            }
         }
 
         void deleteentry(long long int serialno)
@@ -141,8 +253,6 @@ class dataentry
             OUTFILE.close();
         }
 
-
-        // Add more functions for updating an entry
 };
 
 int main(int argc, char const *argv[])
@@ -164,6 +274,7 @@ int main(int argc, char const *argv[])
     long long int serialno{};
     long long int serialnotofind{};
     long long int serialnotodelete{};
+    long long int serialnotoupdate{};
     int countrycode{};
     int dob{};
     int yob{};
@@ -171,11 +282,7 @@ int main(int argc, char const *argv[])
     char choice{};
     bool valid = false;
 
-    this_thread::sleep_for(1s);
-
     cout << "Welcome to UAP Datasystems. Unlock the Power of Data with Our Cutting-Edge Database Solutions." << endl;
-
-    this_thread::sleep_for(1s);
 
     cout << "Please enter your username: ";
     cin >> inputusername;
@@ -189,92 +296,31 @@ int main(int argc, char const *argv[])
         return -1;
     }
 
-    this_thread::sleep_for(1s);
+    
 
     do
     {   actionchoice == 5;
 
         cout << "Please enter a number depending on the action you wish to take: " << endl;
-
-        this_thread::sleep_for(1s);
-
         cout << "Enter 1 for adding an entry." << endl;
         cout << "Enter 2 for viewing entries." << endl;
-        cout << "Enter 3 for updating an entry (not yet functional)." << endl; //Feature to be added
+        cout << "Enter 3 for updating an entry." << endl;
         cout << "Enter 4 for deleting an entry." << endl;
         cout << "Enter 5 to log out." << endl;
         cin >> actionchoice;
 
         if (actionchoice == 1) // add entries
         {
-            this_thread::sleep_for(1s);
+            
             do
             {   
                 choice == 'N';
-                string line;
-                ifstream inputfile ("database.csv");
-                int lineNumber = 1;
-
-                if (inputfile.is_open()) {
-
-                    while (getline(inputfile,line)) {
-                        lineNumber++;
-                    }
-
-                    inputfile.close();
-                    serialno = lineNumber;
-                }
                 
-                else 
-                {
-                    cout << "Unable to open database." << endl;
-                    return -1;
-                }
+                entry.addentry(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
 
-                cout << "Enter first name: ";
-                cin >> firstname;
-                cout << "Enter middle name (Optional, Enter '-' to skip field): ";
-                cin >> middlename;
-                cout << "Enter last name: ";
-                cin >> lastname;
-                cout << "Enter phone number (without country code): ";
-                cin >> phone;
-                cout << "Enter country code (Eg: 1, 44, etc.): ";
-                cin >> countrycode;
-                cout << "Enter E-mail I.D.: ";
-                cin >> email;
-                cout << "Enter date of birth (Eg: 21, 15, etc.): ";
-                cin >> dob;
-                if ((dob < 1) or (dob > 31))
-                {
-                    dob == 0;
-                    cout << "Invalid date input. Cancelling operation." << endl;
-                    this_thread::sleep_for(1s);
-                    break;
-                }
-
-                cout << "Enter month of birth (Eg: January, September, etc.): ";
-                cin >> mob;
-                if ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April ") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December"))
-                {
-                    mob == " ";
-                    cout << "Invalid month input. Cancelling operation." << endl;
-                    this_thread::sleep_for(1s);
-                    break;
-                }
-
-                cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
-                cin >> yob;
-                cout << "Enter gender (Eg: Male, Female, etc.): ";
-                cin >> gender;
-                
-                entry.adddata(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
-
-                this_thread::sleep_for(1s);
                 cout << "Entry has been added." << endl;
 
-                this_thread::sleep_for(1s);
-                cout << "Do you want to add an entry(Y/N)?: ";
+                cout << "Do you want to add another entry(Y/N)?: ";
                 cin >> choice;
                 
             } while (choice == 'Y');
@@ -282,7 +328,7 @@ int main(int argc, char const *argv[])
 
         if (actionchoice == 2) // view entries
         {
-            this_thread::sleep_for(1s);
+            
 
             cout << "Do you want to view a specific entry(Y/N)? If no, all entries will be displayed: ";
             cin >> choice;
@@ -303,71 +349,15 @@ int main(int argc, char const *argv[])
 
         if (actionchoice == 3) // update entry
         {
-            string line;
-            ifstream inputfile ("database.csv");
-            int lineNumber = 1;
-
-            if (inputfile.is_open()) {
-
-                while (getline(inputfile,line)) {
-                    lineNumber++;
-                }
-
-                inputfile.close();
-                serialno = lineNumber;
-            }
-            
-            else 
-            {
-                cout << "Unable to open database." << endl;
-                return -1;
-            }
-
-            cout << "Enter first name: ";
-            cin >> firstname;
-            cout << "Enter middle name (Optional, Enter '-' to skip field): ";
-            cin >> middlename;
-            cout << "Enter last name: ";
-            cin >> lastname;
-            cout << "Enter phone number (without country code): ";
-            cin >> phone;
-            cout << "Enter country code (Eg: 1, 974, 91, etc.): ";
-            cin >> countrycode;
-            cout << "Enter E-mail I.D.: ";
-            cin >> email;
-            cout << "Enter date of birth (Eg: 21, 15, etc.): ";
-            cin >> dob;
-            if ((dob < 1) or (dob > 31))
-            {
-                dob == 0;
-                cout << "Invalid date input. Cancelling operation." << endl;
-                this_thread::sleep_for(1s);
-                break;
-            }
-
-            cout << "Enter month of birth (Eg: January, September, etc.): ";
-            cin >> mob;
-            if ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April ") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December"))
-            {
-                mob == " ";
-                cout << "Invalid month input. Cancelling operation." << endl;
-                this_thread::sleep_for(1s);
-                break;
-            }
-
-            cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
-            cin >> yob;
-            cout << "Enter gender (Eg: Male, Female, etc.): ";
-            cin >> gender;
-
-            entry.updateentry(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
+            cout << "Enter the serial number fo the data entry you want to update: ";
+            cin >> serialnotoupdate;
+            entry.updateentry(firstname, middlename, lastname, countrycode, serialnotoupdate, phone, email, dob, mob, yob, gender);
 
         }
         
 
         if (actionchoice == 4) // delete entry
         {
-            this_thread::sleep_for(1s);
             cout << "Enter the serial number of the entry you want to delete: ";
             cin >> serialnotodelete;
             entry.deleteentry(serialnotodelete);
@@ -376,11 +366,7 @@ int main(int argc, char const *argv[])
          
     } while (actionchoice != 5);
 
-    this_thread::sleep_for(1s);
-
     cout << "Logging out" << endl;
-
-    this_thread::sleep_for(1s);
 
     return 0;
 }
