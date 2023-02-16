@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <regex> // required for generating custom patterns for string verification
+#include <regex> // required for generating custom patterns for string validation
 #include "portal.h"
 using namespace std;
 
