@@ -87,24 +87,30 @@ void dataentry::addentry(string firstname, string middlename, string lastname, i
     regex firstName("[A-Za-z]+");
     while (!regex_match(firstname, firstName)) 
     {
+        cin.clear(); // clear error flags
+        cin.ignore(100, '\n'); // ignore remaining characters in buffer
         cout << "Invalid first name input. Please enter a valid first name: ";
         cin >> firstname;
     }
     
-    cout << "Enter middle name (Optional, Enter '-' to skip field): ";
+    cout << "Enter middle name: ";
     cin >> middlename;
     regex middleName("[A-Za-z]+");
-    while (!regex_match(firstname, middleName) && (middlename != "-"))
+    while (!regex_match(middlename, middleName) && (middlename != "-"))
     {
-        cout << "Invalid middle name input. Please enter a valid first name: ";
+        cin.clear(); // clear error flags
+        cin.ignore(100, '\n'); // ignore remaining characters in buffer
+        cout << "Invalid middle name input. Please enter a valid middle name: ";
         cin >> middlename;
     }
 
     cout << "Enter last name: ";
     cin >> lastname;
     regex lastName("[A-Za-z]+");
-    while (!regex_match(firstname, lastName)) {
-        cout << "Invalid last name input. Please enter a valid first name: ";
+    while (!regex_match(lastname, lastName)) {
+        cin.clear(); // clear error flags
+        cin.ignore(100, '\n'); // ignore remaining characters in buffer
+        cout << "Invalid last name input. Please enter a valid last name: ";
         cin >> lastname;
     }
 
@@ -112,6 +118,8 @@ void dataentry::addentry(string firstname, string middlename, string lastname, i
     cin >> phone;
     while ((phone <= 0) || cin.fail())
     {
+        cin.clear(); // clear error flags
+        cin.ignore(100, '\n'); // ignore remaining characters in buffer
         cout << "Please enter a valid phone number: ";
         cin >> phone;
     }
@@ -120,6 +128,8 @@ void dataentry::addentry(string firstname, string middlename, string lastname, i
     cin >> countrycode;
     while ((countrycode <= 0) || cin.fail())
     {
+        cin.clear(); // clear error flags
+        cin.ignore(100, '\n'); // ignore remaining characters in buffer
         cout << "Please enter a valid country code (omit the '+' sign): ";
         cin >> countrycode;
     }
@@ -129,6 +139,8 @@ void dataentry::addentry(string firstname, string middlename, string lastname, i
     // check if input format is valid
     regex pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     while (!regex_match(email, pattern)) {
+        cin.clear(); // clear error flags
+        cin.ignore(100, '\n'); // ignore remaining characters in buffer
         cout << "Invalid email input. Please enter a valid email address: ";
         cin >> email;
     }
@@ -153,7 +165,17 @@ void dataentry::addentry(string firstname, string middlename, string lastname, i
         cout << "Invalid month input. Please enter a valid month: ";
         cin >> mob;
     }
-
+    while ((dob > 30) and ((mob == "April") or (mob == "June") or (mob == "September") or (mob == "November")))
+    {
+        cout << "The month of " << mob << " has only 30 days. Please enter the correct date: ";
+        cin >> dob;
+    }
+    while ((dob > 31) and ((mob == "January") or (mob == "March") or (mob == "May") or (mob == "July") or (mob == "August") or (mob == "October") or (mob == "December")))
+    {
+        cout << "The month of " << mob << " has only 31 days. Please enter the correct date: ";
+        cin >> dob;
+    }
+    
     cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
     cin >> yob;
     while ((yob < 1850) or (yob > 2023))
@@ -163,10 +185,23 @@ void dataentry::addentry(string firstname, string middlename, string lastname, i
         cout << "Invalid year input. Please enter a value between 1850 and 2023: ";
         cin >> yob;
     }
+    while ((dob > 28) and (mob == "February") and (yob % 4 != 0))
+    {
+        cout << "February " << yob << " has only 28 days. Please enter a valid date: ";
+        cin >> dob;
+    }
+    while ((dob > 29) and (mob == "February") and (yob % 4 == 0))
+    {
+        cout << "February " << yob << " has only 29 days. Please enter a valid date: ";
+        cin >> dob;
+    }
+
     cout << "Enter gender (Eg: Male, Female, etc.): ";
     cin >> gender;
     regex Gender("[A-Za-z]+");
     while (!regex_match(firstname, Gender)) {
+        cin.clear(); // clear error flags
+        cin.ignore(100, '\n'); // ignore remaining characters in buffer
         cout << "Please enter a valid gender: ";
         cin >> gender;
     }
@@ -254,24 +289,30 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                 regex firstName("[A-Za-z]+");
                 while (!regex_match(firstname, firstName)) 
                 {
+                    cin.clear(); // clear error flags
+                    cin.ignore(100, '\n'); // ignore remaining characters in buffer
                     cout << "Invalid first name input. Please enter a valid first name: ";
                     cin >> firstname;
                 }
                 
-                cout << "Enter middle name (Optional, Enter '-' to skip field): ";
+                cout << "Enter middle name: ";
                 cin >> middlename;
                 regex middleName("[A-Za-z]+");
-                while (!regex_match(firstname, middleName) && (middlename != "-"))
+                while (!regex_match(middlename, middleName) && (middlename != "-"))
                 {
-                    cout << "Invalid middle name input. Please enter a valid first name: ";
+                    cin.clear(); // clear error flags
+                    cin.ignore(100, '\n'); // ignore remaining characters in buffer
+                    cout << "Invalid middle name input. Please enter a valid middle name: ";
                     cin >> middlename;
                 }
 
                 cout << "Enter last name: ";
                 cin >> lastname;
                 regex lastName("[A-Za-z]+");
-                while (!regex_match(firstname, lastName)) {
-                    cout << "Invalid last name input. Please enter a valid first name: ";
+                while (!regex_match(lastname, lastName)) {
+                    cin.clear(); // clear error flags
+                    cin.ignore(100, '\n'); // ignore remaining characters in buffer
+                    cout << "Invalid last name input. Please enter a valid last name: ";
                     cin >> lastname;
                 }
 
@@ -279,6 +320,8 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                 cin >> phone;
                 while ((phone <= 0) || cin.fail())
                 {
+                    cin.clear(); // clear error flags
+                    cin.ignore(100, '\n'); // ignore remaining characters in buffer
                     cout << "Please enter a valid phone number: ";
                     cin >> phone;
                 }
@@ -287,6 +330,8 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                 cin >> countrycode;
                 while ((countrycode <= 0) || cin.fail())
                 {
+                    cin.clear(); // clear error flags
+                    cin.ignore(100, '\n'); // ignore remaining characters in buffer
                     cout << "Please enter a valid country code (omit the '+' sign): ";
                     cin >> countrycode;
                 }
@@ -296,6 +341,8 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                 // check if input format is valid
                 regex pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
                 while (!regex_match(email, pattern)) {
+                    cin.clear(); // clear error flags
+                    cin.ignore(100, '\n'); // ignore remaining characters in buffer
                     cout << "Invalid email input. Please enter a valid email address: ";
                     cin >> email;
                 }
@@ -308,7 +355,7 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                     cin.ignore(100, '\n'); // ignore remaining characters in buffer
                     cout << "Invalid date input. Please enter a value between 1 and 31: ";
                     cin >> dob;
-                    
+
                 }
 
                 cout << "Enter month of birth (Eg: January, September, etc.): ";
@@ -320,7 +367,17 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                     cout << "Invalid month input. Please enter a valid month: ";
                     cin >> mob;
                 }
-
+                while ((dob > 30) and ((mob == "April") or (mob == "June") or (mob == "September") or (mob == "November")))
+                {
+                    cout << "The month of " << mob << " has only 30 days. Please enter the correct date: ";
+                    cin >> dob;
+                }
+                while ((dob > 31) and ((mob == "January") or (mob == "March") or (mob == "May") or (mob == "July") or (mob == "August") or (mob == "October") or (mob == "December")))
+                {
+                    cout << "The month of " << mob << " has only 31 days. Please enter the correct date: ";
+                    cin >> dob;
+                }
+                
                 cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
                 cin >> yob;
                 while ((yob < 1850) or (yob > 2023))
@@ -330,16 +387,27 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                     cout << "Invalid year input. Please enter a value between 1850 and 2023: ";
                     cin >> yob;
                 }
-                
+                while ((dob > 28) and (mob == "February") and (yob % 4 != 0))
+                {
+                    cout << "February " << yob << " has only 28 days. Please enter a valid date: ";
+                    cin >> dob;
+                }
+                while ((dob > 29) and (mob == "February") and (yob % 4 == 0))
+                {
+                    cout << "February " << yob << " has only 29 days. Please enter a valid date: ";
+                    cin >> dob;
+                }
+
                 cout << "Enter gender (Eg: Male, Female, etc.): ";
                 cin >> gender;
                 regex Gender("[A-Za-z]+");
                 while (!regex_match(firstname, Gender)) {
+                    cin.clear(); // clear error flags
+                    cin.ignore(100, '\n'); // ignore remaining characters in buffer
                     cout << "Please enter a valid gender: ";
                     cin >> gender;
                 }
                 
-
                 // the data is converted to a string, which is then added into the 'line' string
                 line = to_string(serialno) + "," + firstname + "," + middlename + "," + lastname + "," + to_string(countrycode) + "," + to_string(phone) + "," + email + "," + to_string(dob) + "," + mob + "," + to_string(yob) + "," + gender;
             }
