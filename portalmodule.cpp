@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <regex> // required for e-mail validation
+#include <regex> // required for generating custom patterns for string verification
 #include "portal.h"
 using namespace std;
 
@@ -81,16 +81,49 @@ void dataentry::addentry(string firstname, string middlename, string lastname, i
         cout << "Unable to open database." << endl;
         exit(0);
     }
+
     cout << "Enter first name: ";
     cin >> firstname;
+    regex firstName("[A-Za-z]+");
+    while (!regex_match(firstname, firstName)) 
+    {
+        cout << "Invalid first name input. Please enter a valid first name: ";
+        cin >> firstname;
+    }
+    
     cout << "Enter middle name (Optional, Enter '-' to skip field): ";
     cin >> middlename;
+    regex middleName("[A-Za-z]+");
+    while (!regex_match(firstname, middleName) && (middlename != "-"))
+    {
+        cout << "Invalid middle name input. Please enter a valid first name: ";
+        cin >> middlename;
+    }
+
     cout << "Enter last name: ";
     cin >> lastname;
+    regex lastName("[A-Za-z]+");
+    while (!regex_match(firstname, lastName)) {
+        cout << "Invalid last name input. Please enter a valid first name: ";
+        cin >> lastname;
+    }
+
     cout << "Enter phone number (without country code): ";
     cin >> phone;
+    while ((phone <= 0) || cin.fail())
+    {
+        cout << "Please enter a valid phone number: ";
+        cin >> phone;
+    }
+    
     cout << "Enter country code (Eg: 1, 44, etc.): ";
     cin >> countrycode;
+    while ((countrycode <= 0) || cin.fail())
+    {
+        cout << "Please enter a valid country code (omit the '+' sign): ";
+        cin >> countrycode;
+    }
+
     cout << "Enter E-mail I.D.: ";
     cin >> email;
     // check if input format is valid
@@ -132,6 +165,11 @@ void dataentry::addentry(string firstname, string middlename, string lastname, i
     }
     cout << "Enter gender (Eg: Male, Female, etc.): ";
     cin >> gender;
+    regex Gender("[A-Za-z]+");
+    while (!regex_match(firstname, Gender)) {
+        cout << "Please enter a valid gender: ";
+        cin >> gender;
+    }
 
     ofstream outfile;
     outfile.open("database.csv", ios::app);
@@ -213,14 +251,46 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                 // user enters new data. the same logic as addentry() is followed
                 cout << "Enter first name: ";
                 cin >> firstname;
+                regex firstName("[A-Za-z]+");
+                while (!regex_match(firstname, firstName)) 
+                {
+                    cout << "Invalid first name input. Please enter a valid first name: ";
+                    cin >> firstname;
+                }
+                
                 cout << "Enter middle name (Optional, Enter '-' to skip field): ";
                 cin >> middlename;
+                regex middleName("[A-Za-z]+");
+                while (!regex_match(firstname, middleName) && (middlename != "-"))
+                {
+                    cout << "Invalid middle name input. Please enter a valid first name: ";
+                    cin >> middlename;
+                }
+
                 cout << "Enter last name: ";
                 cin >> lastname;
+                regex lastName("[A-Za-z]+");
+                while (!regex_match(firstname, lastName)) {
+                    cout << "Invalid last name input. Please enter a valid first name: ";
+                    cin >> lastname;
+                }
+
                 cout << "Enter phone number (without country code): ";
                 cin >> phone;
+                while ((phone <= 0) || cin.fail())
+                {
+                    cout << "Please enter a valid phone number: ";
+                    cin >> phone;
+                }
+                
                 cout << "Enter country code (Eg: 1, 44, etc.): ";
                 cin >> countrycode;
+                while ((countrycode <= 0) || cin.fail())
+                {
+                    cout << "Please enter a valid country code (omit the '+' sign): ";
+                    cin >> countrycode;
+                }
+
                 cout << "Enter E-mail I.D.: ";
                 cin >> email;
                 // check if input format is valid
@@ -229,6 +299,7 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                     cout << "Invalid email input. Please enter a valid email address: ";
                     cin >> email;
                 }
+
                 cout << "Enter date of birth (Eg: 21, 15, etc.): ";
                 cin >> dob;
                 // check if input is valid
@@ -239,6 +310,7 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                     cin >> dob;
                     
                 }
+
                 cout << "Enter month of birth (Eg: January, September, etc.): ";
                 cin >> mob;
                 while ((mob != "January") and (mob != "February") and (mob != "March") and (mob != "April") and (mob != "May") and (mob != "June") and (mob != "July") and (mob != "August") and (mob != "September") and (mob != "October") and (mob != "November") and (mob != "December") or cin.fail())
@@ -248,6 +320,7 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                     cout << "Invalid month input. Please enter a valid month: ";
                     cin >> mob;
                 }
+
                 cout << "Enter year of birth (Eg: 1987, 2006, etc.): ";
                 cin >> yob;
                 while ((yob < 1850) or (yob > 2023))
@@ -260,6 +333,12 @@ void dataentry::updateentry(string firstname, string middlename, string lastname
                 
                 cout << "Enter gender (Eg: Male, Female, etc.): ";
                 cin >> gender;
+                regex Gender("[A-Za-z]+");
+                while (!regex_match(firstname, Gender)) {
+                    cout << "Please enter a valid gender: ";
+                    cin >> gender;
+                }
+                
 
                 // the data is converted to a string, which is then added into the 'line' string
                 line = to_string(serialno) + "," + firstname + "," + middlename + "," + lastname + "," + to_string(countrycode) + "," + to_string(phone) + "," + email + "," + to_string(dob) + "," + mob + "," + to_string(yob) + "," + gender;
