@@ -10,15 +10,15 @@ class login
 class dataentry
 {
     public:
-        void addentry(std::string firstname, std::string middlename, std::string lastname, int countrycode, long long int serialno, long long int phone, std::string email, int dob, std::string mob, int yob, std::string gender);
+        void addentry(std::string firstname, std::string middlename, std::string lastname, int countrycode, long long int personid, long long int phone, std::string email, int dob, std::string mob, int yob, std::string gender);
 
         void showdata();
 
-        void showentry(long long int serialno);
+        void showentry(long long int personid);
 
-        void updateentry(std::string firstname, std::string middlename, std::string lastname, int countrycode, long long int serialno, long long int phone, std::string email, int dob, std::string mob, int yob, std::string gender);
+        void updateentry(std::string firstname, std::string middlename, std::string lastname, int countrycode, long long int personid, long long int phone, std::string email, int dob, std::string mob, int yob, std::string gender);
 
-        void deleteentry(long long int serialno);
+        void deleteentry(long long int personid);
 };
 
 #endif

@@ -19,10 +19,10 @@ int main(int argc, char const *argv[])
     string gender{};
     string accounttype{};
     long long int phone{};
-    long long int serialno{};
-    long long int serialnotofind{};
-    long long int serialnotodelete{};
-    long long int serialnotoupdate{};
+    long long int personid{};
+    long long int personidtofind{};
+    long long int personidtodelete{};
+    long long int personidtoupdate{};
     int countrycode{};
     int dob{};
     int yob{};
@@ -49,15 +49,20 @@ int main(int argc, char const *argv[])
         cout << "Enter 4 for deleting an entry." << endl;
         cout << "Enter 5 to log out." << endl;
         cin >> actionchoice;
+        while (cin.fail())
+        {
+            cout << "Enter a number from 1 to 5: ";
+            cin >> actionchoice;
+        }
+        
 
         if (actionchoice == 1) // add entries
         {
-            
             do
             {   
                 choice == 'N';
                 
-                entry.addentry(firstname, middlename, lastname, countrycode, serialno, phone, email, dob, mob, yob, gender);
+                entry.addentry(firstname, middlename, lastname, countrycode, personid, phone, email, dob, mob, yob, gender);
 
                 cout << "Entry has been added." << endl;
 
@@ -75,9 +80,9 @@ int main(int argc, char const *argv[])
             cin >> choice;
             if (choice == 'Y')
             {
-                cout << "Enter the serial number of the data entry: ";
-                cin >> serialnotofind;
-                entry.showentry(serialnotofind);
+                cout << "Enter the person I.D.: ";
+                cin >> personidtofind;
+                entry.showentry(personidtofind);
 
             }
 
@@ -90,18 +95,29 @@ int main(int argc, char const *argv[])
 
         if (actionchoice == 3) // update entry
         {
-            cout << "Enter the serial number of the data entry you want to update: ";
-            cin >> serialnotoupdate;
-            entry.updateentry(firstname, middlename, lastname, countrycode, serialnotoupdate, phone, email, dob, mob, yob, gender);
+            cout << "Enter the person I.D.: ";
+            cin >> personidtoupdate;
+            while (cin.fail())
+            {
+                cout << "Enter a valid person I.D.: ";
+                cin >> personidtoupdate;
+            }
+            
+            entry.updateentry(firstname, middlename, lastname, countrycode, personidtoupdate, phone, email, dob, mob, yob, gender);
 
         }
         
 
         if (actionchoice == 4) // delete entry
         {
-            cout << "Enter the serial number of the entry you want to delete: ";
-            cin >> serialnotodelete;
-            entry.deleteentry(serialnotodelete);
+            cout << "Enter the person I.D.: ";
+            cin >> personidtodelete;
+            while (cin.fail())
+            {
+                cout << "Enter a valid person I.D.: ";
+                cin >> personidtodelete;
+            }
+            entry.deleteentry(personidtodelete);
 
         }
          
