@@ -32,12 +32,12 @@ int main(int argc, char const *argv[])
 
     cout << "Welcome to UAP Datasystems. Unlock the Power of Data with Our Cutting-Edge Database Solutions." << endl;
 
-    valid = loginpage.checklogindata(inputusername, inputpassword, username, password);
-    if (valid == 0)
-    {
-        cout << "Terminating program.";
-        return -1;
-    }
+    // valid = loginpage.checklogindata(inputusername, inputpassword, username, password);
+    // if (valid == 0)
+    // {
+    //     cout << "Terminating program.";
+    //     return -1;
+    // }
 
     do
     {   actionchoice == 5;

@@ -1,8 +1,9 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <regex>
+#include <regex> // required for e-mail validation
 #include "portal.h"
 using namespace std;
 
@@ -147,6 +148,9 @@ void dataentry::showdata()
 {
     string line;
     ifstream inFile("database.csv");
+    cout << endl;
+    cout << "Output displayed in the order: Serial Number, First Name, Middle Name, Last Name, Country Code, Phone Number, Email, Date of Birth, Month of Birth, Year of Birth, Gender" << endl;
+    cout << endl;
     if (inFile.is_open())
     {
         // every line from the csv file is stored in the 'line' string, which is then displayed
@@ -156,16 +160,17 @@ void dataentry::showdata()
         }
         inFile.close();
     }
+    cout << endl;
 
 }
 
 // function displays a single data entry based on the serial number
 void dataentry::showentry(long long int serialno)
 {
-    string line;
+    string line, csvItem;
     ifstream myfile ("database.csv", ios::app);
     int lineNumber = 0;
-
+    cout << "Output displayed in the order: Serial Number, First Name, Middle Name, Last Name, Country Code, Phone Number, Email, Date of Birth, Month of Birth, Year of Birth, Gender" << endl;
     if (myfile.is_open()) {
         // every line from the csv file is stored in the 'line' string, which is then displayed
         while (getline(myfile,line)) {
@@ -173,7 +178,10 @@ void dataentry::showentry(long long int serialno)
             lineNumber++;
             //the data stored in 'line' is printed
             if(lineNumber == serialno) {
-                cout << line << endl;
+                istringstream myline(line);
+                while(getline(myline, csvItem, ',')) {
+                    cout << csvItem << endl;
+                }
             }
         }
         myfile.close();
@@ -288,12 +296,19 @@ void dataentry::deleteentry(long long int serialno)
     vector<string> lines; // the vector stores all the data entries from the csv file
     ifstream INFILE("database.csv");
     int lineNumber = 0;
+    int counter = 1; // initialize counter to 1
 
     if (INFILE.is_open()) {
         while (getline(INFILE, line)) {
             lineNumber++; // lineNumber increments itself with every iteration as long as 'line' receives data
             if (lineNumber != serialno) {
-                lines.push_back(line); // 'lines' vector increments its size with every iteration as long as lineNumber does not equal the serialno
+                // replace serial number with counter value and push updated line into 'lines' vector
+                size_t pos = line.find(',');
+                if (pos != string::npos) {
+                    string updatedLine = to_string(counter) + line.substr(pos);
+                    lines.push_back(updatedLine);
+                    counter++;
+                }
             }
         }
         INFILE.close();
