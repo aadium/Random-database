@@ -9,7 +9,6 @@ The code is a simple database management system that allows for data entry, retr
 <Li>Every data entry has a unique ID associated with it, which allows the user to view, modify, and delete a specific data entry.
 <Li>Object oriented programming principles were implemented, and that brought the several benefits of OOP with it.
 <Li>The code has several input validation statements that prevent an incorrect input from being entered. This is accomplished through while loops.
-<Li>
 </UL>
 <H3>Lessons Learnt</H3>
 <UL>
@@ -18,3 +17,9 @@ The code is a simple database management system that allows for data entry, retr
 <Li>Got a lot of experience in debugging programs.
 <Li>Got experience regarding the development of complex, error-resistant programs.
 <Li>Strengthened my previous knowledge of C++.
+</UL>
+<H3>Further development ideas</H3>
+<UL>
+<li>Adding multiple accounts.
+<li>Adding features to create multiple csv sheets, each classifying a specific type of information.
+<li>Adding a feature to link certain fields of different csv sheets.
