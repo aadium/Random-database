@@ -78,7 +78,7 @@ int main(int argc, char const *argv[])
 
             cout << "Do you want to view a specific entry(Y/N)? If no, all entries will be displayed: ";
             cin >> choice;
-            if (choice == 'Y')
+            if ((choice == 'Y') || (choice == 'y'))
             {
                 cout << "Enter the person I.D.: ";
                 cin >> personidtofind;
@@ -86,9 +86,14 @@ int main(int argc, char const *argv[])
 
             }
 
-            else
+            else if ((choice == 'N') || (choice == 'n'))
             {
                 entry.showdata();
+            }
+
+            else
+            {
+                cout << "Invalid input" << endl;
             }
                 
         }
