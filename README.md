@@ -1,4 +1,5 @@
 <H1>Simple database</H1>
+<img src = "https://www.pngkey.com/small/231/2317080.png" align = right>
 <H3>Summary of program</H3>
 The code is a simple database management system that allows for data entry, retrieval, and modification. The program has two classes login and dataentry. The login class has a function that verifies the entered username and password against the username and password specified in the username.txt and password.txt files respectively. The dataentry class has functions for adding, displaying, retrieving and deleting data from the database.csv file. The main function initializes objects from the two classes and takes inputs from the user to perform different actions such as adding new data to the database, displaying all data, retrieving a specific data entry based on the serial number, or deleting a specific data entry based on the serial number.
 <H3>Features</H3>
