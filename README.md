@@ -8,7 +8,7 @@ The code is a simple database management system that allows for data entry, retr
 <Li>User can perform any of the 4 actions: Adding a data entry, viewing all the data or a specific entry, modifying and deleting a specific data entry.
 <Li>Every data entry has a unique ID associated with it, which allows the user to view, modify, and delete a specific data entry.
 <Li>Object oriented programming principles were implemented, and that brought the several benefits of OOP with it.
-<Li>The code has several input validation statements that prevent an incorrect input from being entered. This is accomplished through while loops.
+<Li>The code has several input validation statements that prevent an incorrect input from being entered. This is accomplished through while loops that iterate until the user enters a valid input.
 </UL>
 <H3>Lessons Learnt</H3>
 <UL>
