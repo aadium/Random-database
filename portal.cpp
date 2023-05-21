@@ -40,7 +40,8 @@ int main(int argc, char const *argv[])
     }
 
     do
-    {   actionchoice == 5;
+    {
+        actionchoice == 5;
 
         cout << "Please enter a number depending on the action you wish to take: " << endl;
         cout << "Enter 1 for adding an entry." << endl;
@@ -54,27 +55,25 @@ int main(int argc, char const *argv[])
             cout << "Enter a number from 1 to 5: ";
             cin >> actionchoice;
         }
-        
 
         if (actionchoice == 1) // add entries
         {
             do
-            {   
+            {
                 choice == 'N';
-                
+
                 entry.addentry(firstname, middlename, lastname, countrycode, personid, phone, email, dob, mob, yob, gender);
 
                 cout << "Entry has been added." << endl;
 
                 cout << "Do you want to add another entry(Y/N)?: ";
                 cin >> choice;
-                
+
             } while (choice == 'Y');
         }
 
         if (actionchoice == 2) // view entries
         {
-            
 
             cout << "Do you want to view a specific entry(Y/N)? If no, all entries will be displayed: ";
             cin >> choice;
@@ -83,7 +82,6 @@ int main(int argc, char const *argv[])
                 cout << "Enter the person I.D.: ";
                 cin >> personidtofind;
                 entry.showentry(personidtofind);
-
             }
 
             else if ((choice == 'N') || (choice == 'n'))
@@ -95,7 +93,6 @@ int main(int argc, char const *argv[])
             {
                 cout << "Invalid input" << endl;
             }
-                
         }
 
         if (actionchoice == 3) // update entry
@@ -107,11 +104,9 @@ int main(int argc, char const *argv[])
                 cout << "Enter a valid person I.D.: ";
                 cin >> personidtoupdate;
             }
-            
-            entry.updateentry(firstname, middlename, lastname, countrycode, personidtoupdate, phone, email, dob, mob, yob, gender);
 
+            entry.updateentry(firstname, middlename, lastname, countrycode, personidtoupdate, phone, email, dob, mob, yob, gender);
         }
-        
 
         if (actionchoice == 4) // delete entry
         {
@@ -123,9 +118,8 @@ int main(int argc, char const *argv[])
                 cin >> personidtodelete;
             }
             entry.deleteentry(personidtodelete);
-
         }
-         
+
     } while (actionchoice != 5);
 
     cout << "Logging out" << endl;
